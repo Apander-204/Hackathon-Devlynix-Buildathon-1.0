@@ -5,6 +5,7 @@ import SearchBar from './components/SearchBar';
 import UserCard from './components/UserCard';
 import ProfileForm from './components/ProfileForm';
 import {initDemoUsers, loadAllUsers, addUser} from "./utils/localStorage";
+import { skillsSort } from './utils/sortingUsers';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
     });
 
     let [activeGrades, setActiveGrades] = useState({
+        "All": true,
         "Trainee": false,
         "Junior": false,
         "Middle": false,
@@ -34,6 +36,14 @@ function App() {
         setUsers(loadAllUsers());
     }, []);
 
+    useEffect(() => {
+        setUsers(skillsSort(activeSkills, activeGrades));
+    }, [activeSkills, activeGrades]);
+
+    useEffect(() => {
+        
+    }, [activeGrades]);
+
     return(
         <div className="bg-neutral-900 flex flex-col justify-center items-center">
             <div className="w-full">
@@ -41,7 +51,7 @@ function App() {
             </div>
             
             <div className="flex flex-wrap w-full justify-around items-center mt-12">
-                <FilterChips />
+                <FilterChips activeGrades={activeGrades} activeSkills={activeSkills} setActiveGrades={setActiveGrades} setActiveSkills={setActiveSkills} setUsers={setUsers} />
                 <SearchBar />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">

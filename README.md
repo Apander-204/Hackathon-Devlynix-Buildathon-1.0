@@ -1,0 +1,1 @@
+This is HackSearch MVP for Devlynix Buildathon 1.0 Hackathon

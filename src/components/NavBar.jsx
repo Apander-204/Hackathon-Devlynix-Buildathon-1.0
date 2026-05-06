@@ -1,4 +1,4 @@
-export default function NavBar() {
+export default function NavBar({createProfileMenu, setCreateProfileMenu}) {
 
     return(
         <header className="bg-zinc-900 text-neutral-50 shadow-[0px_5px_5px_-3px_rgba(227,_227,_227,_0.1)] w-full">
@@ -8,7 +8,7 @@ export default function NavBar() {
                 </div>
 
                 <div>
-                    <button className="bg-neutral-50 text-neutral-900 rounded-md p-2">Create Profile</button>
+                    <button className="bg-neutral-50 text-neutral-900 rounded-md p-2" onClick={() => setCreateProfileMenu(!createProfileMenu)}>Create Profile</button>
                 </div>
             </div>
         </header>

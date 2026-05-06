@@ -4,6 +4,7 @@ import FilterChips from './components/FilterChips';
 import SearchBar from './components/SearchBar';
 import UserCard from './components/UserCard';
 import ProfileForm from './components/ProfileForm';
+import ProfileModal from './components/ProfileModal';
 import {initDemoUsers, loadAllUsers, addUser} from "./utils/localStorage";
 import { skillsSort } from './utils/sortingUsers';
 
@@ -12,6 +13,8 @@ function App() {
     let [users, setUsers] = useState([]);
     let [activeUsers, setActiveUsers] = useState([]);
     let [searchTerm, setSearchTerm] = useState("");
+
+    let [createdUser, setCreatedUser] = useState(null);
 
     let [activeSkills, setActiveSkills] = useState({
         "All": true,
@@ -59,6 +62,19 @@ function App() {
 
     let [createProfileMenu, setCreateProfileMenu] = useState(false);
 
+    const [selectedUser, setSelectedUser] = useState(null);
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+    const handleViewProfile = (user) => {
+        setSelectedUser(user);
+        setIsProfileOpen(true);
+    };
+
+    const handleCloseProfile = () => {
+        setIsProfileOpen(false);
+        setSelectedUser(null);
+    };
+
     return(
         <div className="bg-neutral-900 flex flex-col justify-center items-center">
             {createProfileMenu ? (
@@ -78,10 +94,24 @@ function App() {
                 <FilterChips activeGrades={activeGrades} activeSkills={activeSkills} setActiveGrades={setActiveGrades} setActiveSkills={setActiveSkills} setUsers={setUsers} />
                 <SearchBar searchRef={searchRef} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
-                {activeUsers.length > 0 ? activeUsers.map((user) => (
-                    <UserCard username={user.name} description={user.description} skills={user.skills} grade={user.grade} emoji={user.emoji}/>
-                )) : ""};
+            <div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
+                    {users.map(user => (
+                        <UserCard 
+                            key={user.id} 
+                            user={user} 
+                            onViewProfile={handleViewProfile}
+                        />
+                    ))}
+                </div>
+
+                {isProfileOpen && selectedUser && (
+                    <ProfileModal 
+                        user={selectedUser} 
+                        onClose={handleCloseProfile}
+                    />
+                )}
             </div>
         </div>
         

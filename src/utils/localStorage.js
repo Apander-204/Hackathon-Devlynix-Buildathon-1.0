@@ -21,6 +21,7 @@ function addUser(user) {
     let users = JSON.parse(localStorage.getItem("hacksearch_users") || []);
     users.push(user);
     localStorage.setItem("hacksearch_users", JSON.stringify(users));
+    localStorage.setItem("hacksearch_created_user", JSON.stringify(user));
 }
 
 export {initDemoUsers, loadAllUsers, addUser};

@@ -5,7 +5,7 @@ export default function NavBar({ createProfileMenu, setCreateProfileMenu, create
             <div className="max-w-7xl mx-auto px-4 py-5 flex items-center justify-between">
                 <div>
                     <h2 className="text-white font-mono text-xl tracking-tighter">
-                        DevMatch
+                        HackSearch
                     </h2>
                 </div>
 

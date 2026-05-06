@@ -3,12 +3,12 @@ function initDemoUsers() {
         const demos = [
             { 
                 id: 1, 
-                name: "Sarah Chen", 
-                description: "Full-stack developer with 5 years of experience. Passionate about React and clean code.", 
-                skills: ["React", "Node.js", "TypeScript"], 
-                grade: "Senior", 
+                name: "Andrey Panin", 
+                description: "Hello, the Jury!!! I am a beginner frontend developer. I write clean code and responsive applications using React and Next.js.", 
+                skills: ["React", "Node.js", "TypeScript", "Next.js"], 
+                grade: "Junior", 
                 emoji: "🚀", 
-                socials: { linkedin: "#", telegram: "#", discord: "#" }
+                socials: { linkedin: "#", telegram: "apandeer", discord: "apander" }
             },
             { 
                 id: 2, 

@@ -7,12 +7,12 @@ export default function Footer() {
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                     <div>
                         <h2 className="text-white font-mono text-sm tracking-tighter">
-                            DevMatch
+                            HackSearch
                         </h2>
                     </div>
 
                     <div className="text-neutral-600 text-xs font-mono">
-                        <p>© {currentYear} DevMatch. All rights reserved.</p>
+                        <p>© {currentYear} HackSearch. All rights reserved.</p>
                     </div>
 
                     <div className="flex gap-6">

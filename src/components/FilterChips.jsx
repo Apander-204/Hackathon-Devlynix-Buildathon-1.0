@@ -4,7 +4,6 @@ import { skillsSort } from "../utils/sortingUsers";
 export default function FilterChips({activeSkills, setActiveSkills, activeGrades, setActiveGrades}) {
 
     const categories = ["All", "HTML", "CSS", "JavaScript", "React", "Vue", "Angular", "Python", "FastAPI"];
-
     let grades = ["All", "Trainee", "Junior", "Middle", "Senior"];
 
     const changeSkill = (skill) => {
@@ -69,26 +68,50 @@ export default function FilterChips({activeSkills, setActiveSkills, activeGrades
     };
 
     return(
-        <div className="flex flex-col bg-neutral-900">
-            <h2 className="text-neutral-400 text-7xl mb-3">Skills</h2>
-            <ul className={`flex flex-wrap gap-3 text-lg mb-7`}>
-                {categories.map((category) => (
-                    <li key={category}
-                        className={`${activeSkills[category] ? "text-neutral-400" : "text-neutral-50"} hover:text-neutral-400 cursor-pointer`}
-                        onClick={() => changeSkill(category)}>
-                        {category}
-                    </li>
-                ))}
-            </ul>
-            <ul className={`flex flex-wrap gap-3 text-lg mb-7`}>
-                {grades.map((grade) => (
-                    <li key={grade}
-                        className={`${activeGrades[grade] ? "text-neutral-400" : "text-neutral-50"} hover:text-neutral-400 cursor-pointer`}
-                        onClick={() => changeGrade(grade)}>
-                        {grade}
-                    </li>
-                ))}
-            </ul>
+        <div className="flex flex-col w-full md:w-auto">
+            <div className="mb-6">
+                <h2 className="text-gray-500 text-sm uppercase tracking-wider mb-3 font-mono">
+                    Filter by skills
+                </h2>
+                <ul className="flex flex-wrap gap-2">
+                    {categories.map((category) => (
+                        <li key={category}>
+                            <button
+                                onClick={() => changeSkill(category)}
+                                className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 ${
+                                    activeSkills[category] 
+                                        ? "bg-white text-black" 
+                                        : "bg-neutral-800 text-gray-400 hover:bg-neutral-700 hover:text-gray-200"
+                                }`}
+                            >
+                                {category}
+                            </button>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            <div>
+                <h2 className="text-gray-500 text-sm uppercase tracking-wider mb-3 font-mono">
+                    Filter by level
+                </h2>
+                <ul className="flex flex-wrap gap-2">
+                    {grades.map((grade) => (
+                        <li key={grade}>
+                            <button
+                                onClick={() => changeGrade(grade)}
+                                className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 ${
+                                    activeGrades[grade] 
+                                        ? "bg-white text-black" 
+                                        : "bg-neutral-800 text-gray-400 hover:bg-neutral-700 hover:text-gray-200"
+                                }`}
+                            >
+                                {grade}
+                            </button>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 }

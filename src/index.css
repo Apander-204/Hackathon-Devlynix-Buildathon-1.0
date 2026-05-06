@@ -6,11 +6,56 @@
     font-family: 'Inter', sans-serif;
 }
 
-h1, h2, h3, .font-mono, .level-badge, .skill-chip {
+button,
+input,
+textarea,
+select,
+.font-mono,
+.skill-chip,
+.grade-badge,
+.card-title,
+.modal-title {
     font-family: 'JetBrains Mono', monospace;
-    letter-spacing: -0.02em;
+}
+
+input, 
+textarea,
+button {
+    font-family: 'JetBrains Mono', monospace;
 }
 
 body {
     background-color: #0A0A0A;
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOutDown {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+.card-enter {
+    animation: fadeInUp 0.3s ease-out forwards;
+}
+
+.card-exit {
+    animation: fadeOutDown 0.2s ease-in forwards;
 }

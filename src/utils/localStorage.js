@@ -1,15 +1,35 @@
 function initDemoUsers() {
-  if (!localStorage.getItem("hacksearch_users")) {
-    const demos = [
-      { id: 1, name: "Анна", description: "testtesttest", skills: ["React"], grade: "Middle", emoji: "❤️", socials: {
-            linkedin: '',
-            telegram: '',
-            discord: ''
-        }
-      },
-    ];
-    localStorage.setItem("hacksearch_users", JSON.stringify(demos));
-  }
+    if (!localStorage.getItem("hacksearch_users")) {
+        const demos = [
+            { 
+                id: 1, 
+                name: "Анна", 
+                description: "Frontend разработчик с опытом 3 года", 
+                skills: ["React", "CSS", "HTML"], 
+                grade: "Middle", 
+                emoji: "❤️", 
+                socials: {
+                    linkedin: '',
+                    telegram: '',
+                    discord: ''
+                }
+            },
+            { 
+                id: 2, 
+                name: "Иван", 
+                description: "Fullstack разработчик", 
+                skills: ["JavaScript", "React", "Python"], 
+                grade: "Senior", 
+                emoji: "🚀", 
+                socials: {
+                    linkedin: '',
+                    telegram: '',
+                    discord: ''
+                }
+            }
+        ];
+        localStorage.setItem("hacksearch_users", JSON.stringify(demos));
+    }
 }
 
 function loadAllUsers() {
@@ -18,10 +38,23 @@ function loadAllUsers() {
 }
 
 function addUser(user) {
-    let users = JSON.parse(localStorage.getItem("hacksearch_users") || []);
+    let users = JSON.parse(localStorage.getItem("hacksearch_users") || "[]");
     users.push(user);
     localStorage.setItem("hacksearch_users", JSON.stringify(users));
     localStorage.setItem("hacksearch_created_user", JSON.stringify(user));
 }
 
-export {initDemoUsers, loadAllUsers, addUser};
+function getCreatedUser() {
+    const user = localStorage.getItem("hacksearch_created_user");
+    return user ? JSON.parse(user) : null;
+}
+
+function clearCreatedUser() {
+    localStorage.removeItem("hacksearch_created_user");
+}
+
+function updateCreatedUser(user) {
+    localStorage.setItem("hacksearch_created_user", JSON.stringify(user));
+}
+
+export { initDemoUsers, loadAllUsers, addUser, getCreatedUser, clearCreatedUser, updateCreatedUser };

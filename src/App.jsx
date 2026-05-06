@@ -5,7 +5,7 @@ import SearchBar from './components/SearchBar';
 import UserCard from './components/UserCard';
 import ProfileForm from './components/ProfileForm';
 import ProfileModal from './components/ProfileModal';
-import {initDemoUsers, loadAllUsers, addUser} from "./utils/localStorage";
+import {initDemoUsers, loadAllUsers, addUser, getCreatedUser, clearCreatedUser} from "./utils/localStorage";
 import { skillsSort } from './utils/sortingUsers';
 
 function App() {
@@ -39,14 +39,33 @@ function App() {
     let searchRef = useRef(null);
 
     const handleAddProfile = (newUser) => {
-        const updatedUsers = [...users, newUser];
-        setUsers(updatedUsers);
         addUser(newUser);
+
+        const updatedUsers = loadAllUsers();
+        setUsers(updatedUsers);
+        setCreatedUser(newUser);
+        setCreateProfileMenu(false);
+    };
+
+    const handleLogout = () => {
+        clearCreatedUser();
+        setCreatedUser(null);
+    };
+
+    const handleViewProfile = (user) => {
+        setSelectedUser(user);
+        setIsProfileOpen(true);
     };
 
     useEffect(() => {
         initDemoUsers();
-        setUsers(loadAllUsers());
+        const loadedUsers = loadAllUsers();
+        setUsers(loadedUsers);
+
+        const savedCreatedUser = getCreatedUser();
+        if (savedCreatedUser) {
+            setCreatedUser(savedCreatedUser);
+        }
     }, []);
 
     useEffect(() => {
@@ -65,11 +84,6 @@ function App() {
     const [selectedUser, setSelectedUser] = useState(null);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-    const handleViewProfile = (user) => {
-        setSelectedUser(user);
-        setIsProfileOpen(true);
-    };
-
     const handleCloseProfile = () => {
         setIsProfileOpen(false);
         setSelectedUser(null);
@@ -87,7 +101,7 @@ function App() {
             ) : null}
 
             <div className="w-full">
-                <NavBar createProfileMenu={createProfileMenu} setCreateProfileMenu={setCreateProfileMenu} />
+                <NavBar createProfileMenu={createProfileMenu} setCreateProfileMenu={setCreateProfileMenu} createdUser={createdUser} onLogout={handleLogout}/>
             </div>
             
             <div className="flex flex-wrap w-full justify-around items-center mt-12">

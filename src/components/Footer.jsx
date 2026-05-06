@@ -17,22 +17,16 @@ export default function Footer() {
 
                     <div className="flex gap-6">
                         <a 
-                            href="#" 
+                            href="https://github.com/Apander-204" 
                             className="text-neutral-500 text-xs font-mono hover:text-white transition-colors duration-200"
                         >
                             GitHub
                         </a>
                         <a 
-                            href="#" 
+                            href="https://discordapp.com/users/683617035036786868" 
                             className="text-neutral-500 text-xs font-mono hover:text-white transition-colors duration-200"
                         >
                             Discord
-                        </a>
-                        <a 
-                            href="#" 
-                            className="text-neutral-500 text-xs font-mono hover:text-white transition-colors duration-200"
-                        >
-                            Twitter
                         </a>
                     </div>
                 </div>

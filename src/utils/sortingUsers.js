@@ -1,4 +1,4 @@
-function skillsSort(users, activeSkills, activeGrades, searchTerm) {
+export function skillsSort(users, activeSkills, activeGrades, searchTerm) {
     const activeSkillsList = Object.keys(activeSkills).filter(s => activeSkills[s] && s !== "All");
     const activeGradesList = Object.keys(activeGrades).filter(g => activeGrades[g] && g !== "All");
 
@@ -26,5 +26,3 @@ function skillsSort(users, activeSkills, activeGrades, searchTerm) {
         return skillMatch && gradeMatch && nameMatch;
     });
 }
-
-export { skillsSort };

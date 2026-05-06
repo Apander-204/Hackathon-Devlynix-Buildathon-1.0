@@ -5,6 +5,7 @@ import SearchBar from './components/SearchBar';
 import UserCard from './components/UserCard';
 import ProfileForm from './components/ProfileForm';
 import ProfileModal from './components/ProfileModal';
+import Footer from './components/Footer';
 import {initDemoUsers, loadAllUsers, addUser, getCreatedUser, clearCreatedUser} from "./utils/localStorage";
 import { skillsSort } from './utils/sortingUsers';
 
@@ -68,16 +69,13 @@ function App() {
         }
     }, []);
 
+
     useEffect(() => {
         if (users.length > 0) {
             const filtered = skillsSort(users, activeSkills, activeGrades, searchTerm);
             setActiveUsers(filtered);
         }
-    }, [users]);
-
-    useEffect(() => {
-        setActiveUsers(skillsSort(users, activeSkills, activeGrades, searchRef.current.value));
-    }, [activeSkills, activeGrades, searchTerm]);
+    }, [users, activeSkills, activeGrades, searchTerm]);
 
     let [createProfileMenu, setCreateProfileMenu] = useState(false);
 
@@ -90,7 +88,7 @@ function App() {
     };
 
     return(
-        <div className="bg-neutral-900 flex flex-col justify-center items-center">
+        <div className="bg-neutral-900 flex flex-col justify-center items-center min-h-screen bg-neutral-900">
             {createProfileMenu ? (
                 <div className="w-full fixed flex justify-center items-center top-10">
                     <ProfileForm createProfileMenu={createProfileMenu} setCreateProfileMenu={setCreateProfileMenu} onAddProfile={handleAddProfile}/>
@@ -106,12 +104,12 @@ function App() {
             
             <div className="flex flex-wrap w-full justify-around items-center mt-12">
                 <FilterChips activeGrades={activeGrades} activeSkills={activeSkills} setActiveGrades={setActiveGrades} setActiveSkills={setActiveSkills} setUsers={setUsers} />
-                <SearchBar searchRef={searchRef} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+                <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
             </div>
             <div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
-                    {users.map(user => (
+                    {activeUsers.map(user => (
                         <UserCard 
                             key={user.id} 
                             user={user} 
@@ -126,6 +124,9 @@ function App() {
                         onClose={handleCloseProfile}
                     />
                 )}
+            </div>
+            <div>
+                <Footer />
             </div>
         </div>
         
